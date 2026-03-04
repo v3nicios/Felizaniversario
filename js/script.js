@@ -22,6 +22,7 @@ $('#play').click(function () {
     audio.play();
 
 });
+//Controla o que e escrito
 var typed = new Typed("#typed", {
     stringsElement: '#typed-strings',
     typeSpeed: 50,
