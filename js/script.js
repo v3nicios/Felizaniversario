@@ -31,17 +31,14 @@ class Snowflakes {
         this.canvas.height = window.innerHeight;
     }
 
-    init() {
+init() {
         this.resize();
         for (let i = 0; i < this.count; i++) {
             this.particles.push({
                 x: Math.random() * this.canvas.width,
                 y: Math.random() * this.canvas.height,
-                size: (Math.random() * 0.0001) + 0.002, // Escala reduzida pois o path original é enorme
-                speed: (Math.random() * 1) + 0.2,
-                opacity: (Math.random() * 0.3) + 0.4,
-                swing: Math.random() * 3,
-                step: 0
+                size: (Math.random() * 0.001) + 0.001, 
+                speed: (Math.random() * 1) + 0.3 // Um pouco mais rápido para parecer queda direta
             });
         }
     }
@@ -52,23 +49,19 @@ class Snowflakes {
 
         this.particles.forEach(p => {
             this.ctx.save();
-            this.ctx.globalAlpha = p.opacity;
-            // Posiciona a partícula
             this.ctx.translate(p.x, p.y);
-            // Aplica a escala (o path original tem ~12000 unidades, por isso 0.00x)
             this.ctx.scale(p.size, -p.size); 
-            // Desenha o Path2D
             this.ctx.fill(this.shape);
             this.ctx.restore();
 
-            // Lógica de movimento "neve"
+            // MOVIMENTO VERTICAL DIRETO
             p.y += p.speed;
-            p.step += 0.02;
-            p.x += Math.sin(p.step) * p.swing;
 
+            // Se sair da tela embaixo, volta para o topo na mesma coluna X
             if (p.y > this.canvas.height + 50) {
                 p.y = -50;
-                p.x = Math.random() * this.canvas.width;
+                // Opcional: manter o X para ser 100% vertical
+                // p.x = Math.random() * this.canvas.width; // Se quiser que ele mude de coluna ao resetar
             }
         });
     }
