@@ -37,7 +37,7 @@ init() {
             this.particles.push({
                 x: Math.random() * this.canvas.width,
                 y: Math.random() * this.canvas.height,
-                size: (Math.random() * 0.001) + 0.001, 
+                size: (Math.random() * 0.001) + 0.002, 
                 speed: (Math.random() * 1) + 0.3 // Um pouco mais rápido para parecer queda direta
             });
         }
